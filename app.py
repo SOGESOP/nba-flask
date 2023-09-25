@@ -5,7 +5,7 @@ from datetime import datetime
 import pandas
 
 app=Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI']="sqlite:///teams.db"
+app.config['SQLALCHEMY_DATABASE_URI']="sqlite:///players.db"
 app.app_context().push()
 db=SQLAlchemy(app)
 
@@ -19,20 +19,20 @@ class Players(db.Model):
     age=db.Column(db.Integer, nullable=False)
     team=db.Column(db.String(3), nullable=False)
     games=db.Column(db.Integer)
-    games_started=db.Column(db.Integer)
+    # games_started=db.Column(db.Integer)
     minutes_played=db.Column(db.Integer)
-    fg_made=db.Column(db.Integer)
-    fg_attempted=db.Column(db.Integer)
+    # fg_made=db.Column(db.Integer)
+    # fg_attempted=db.Column(db.Integer)
     fg_percent=db.Column(db.Integer)
-    three_point_made=db.Column(db.Integer)
-    three_point_attempt=db.Column(db.Integer)
+    # three_point_made=db.Column(db.Integer)
+    # three_point_attempt=db.Column(db.Integer)
     three_point_percent=db.Column(db.Integer)
-    two_point_made=db.Column(db.Integer)
-    two_point_attempted=db.Column(db.Integer)
-    two_point_percent=db.Column(db.Integer)
-    effective_fg=db.Column(db.Integer)
-    free_throw_made=db.Column(db.Integer)
-    free_throw_attempt=db.Column(db.Integer)
+    # two_point_made=db.Column(db.Integer)
+    # two_point_attempted=db.Column(db.Integer)
+    # two_point_percent=db.Column(db.Integer)
+    # effective_fg=db.Column(db.Integer)
+    # free_throw_made=db.Column(db.Integer)
+    # free_throw_attempt=db.Column(db.Integer)
     free_throw_percent=db.Column(db.Integer)
     offensive_rb=db.Column(db.Integer)
     defensive_rb=db.Column(db.Integer)
@@ -49,13 +49,29 @@ class Players(db.Model):
         return '<Name %r>' %self.name
     
     
+class InsertPlayer:
+    def __init__(self, id, name, pos, age, team, g, mp,
+                fgp, tpp, rb, ass, stl, blk, tur, fwl, pts ):
+        self.id=id
+        self.name-name
+        self.pos=pos
+        self.age=age
+        self.team=team
+        self.g=g
+        self.mp=mp
+        self.fgp=fgp
+        self.tpp=tpp
+        self.rb=rb
+        self.ass=ass
+        self.stl=stl
+        self.blk=blk
+        self.tur=tur
+        self.fwl=fwl
+        self.pts=pts
+
 temp_df=pandas.read_csv("2021.csv")
 
-# for i in range(100):
-#     player=
-    
-#     db.session.add(player)
-
+for i in range(d)
 
 
 
@@ -72,9 +88,9 @@ def index():
 def page_not_found(e):
     return render_template("404.html"), 404
 
-@app.route("/teams")
+@app.route("/players")
 
-def teams():
-    return render_template("teams.html")
+def players():
+    return render_template("players.html")
 
 
