@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
 from datetime import datetime
 import pandas
-
+import os
 app=Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI']="sqlite:///players.db"
 app.app_context().push()
@@ -69,10 +69,12 @@ class InsertPlayer:
         self.fwl=fwl
         self.pts=pts
 
-temp_df=pandas.read_csv("2021.csv")
+base_path=os.path.normpath({os.getcwd()}+ {os.sep}+ {os.pardir})
+df_path=f"{base_path}{os.sep}static{os.sep}csv"
 
-for i in range(d)
+temp_df=pandas.read_csv(f"{df_path}{os.sep}2021.csv")
 
+for i in range
 
 
 @app.route("/")
