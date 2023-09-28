@@ -9,72 +9,69 @@ app.config['SQLALCHEMY_DATABASE_URI']="sqlite:///players.db"
 app.app_context().push()
 db=SQLAlchemy(app)
 
-with app.app_context():
-    db.create_all()
+need to install psycopg2
+
 
 class Players(db.Model):
-    id=db.Column(db.Integer, primary_key=True) 
+    id=db.Column(db.Float, primary_key=True) 
     name=db.Column(db.String(50),  unique=True)
-    posistion=db.Column(db.String(2), nullable=False)
-    age=db.Column(db.Integer, nullable=False)
-    team=db.Column(db.String(3), nullable=False)
-    games=db.Column(db.Integer)
-    # games_started=db.Column(db.Integer)
-    minutes_played=db.Column(db.Integer)
-    # fg_made=db.Column(db.Integer)
-    # fg_attempted=db.Column(db.Integer)
-    fg_percent=db.Column(db.Integer)
-    # three_point_made=db.Column(db.Integer)
-    # three_point_attempt=db.Column(db.Integer)
-    three_point_percent=db.Column(db.Integer)
-    # two_point_made=db.Column(db.Integer)
-    # two_point_attempted=db.Column(db.Integer)
-    # two_point_percent=db.Column(db.Integer)
-    # effective_fg=db.Column(db.Integer)
-    # free_throw_made=db.Column(db.Integer)
-    # free_throw_attempt=db.Column(db.Integer)
-    free_throw_percent=db.Column(db.Integer)
-    offensive_rb=db.Column(db.Integer)
-    defensive_rb=db.Column(db.Integer)
-    total_rb=db.Column(db.Integer)
-    assist=db.Column(db.Integer)
-    steals=db.Column(db.Integer)
-    blocks=db.Column(db.Integer)
-    turnover=db.Column(db.Integer)
-    fouls=db.Column(db.Integer)
-    points=db.Column(db.Integer)
+    pos=db.Column(db.String(2), nullable=False)
+    age=db.Column(db.Float, nullable=False)
+    tm=db.Column(db.String(3), nullable=False)
+    g=db.Column(db.Float)
+    gs=db.Column(db.Float)
+    mp=db.Column(db.Float)
+    fg=db.Column(db.Float)
+    fga=db.Column(db.Float)
+    fg_percent=db.Column(db.Float)
+    three_point=db.Column(db.Float)
+    three_point_a=db.Column(db.Float)
+    three_point_percent=db.Column(db.Float)
+    two_point=db.Column(db.Float)
+    two_point_a=db.Column(db.Float)
+    two_point_percent=db.Column(db.Float)
+    efg=db.Column(db.Float)
+    ft=db.Column(db.Float)
+    fta=db.Column(db.Float)
+    ft_percent=db.Column(db.Float)
+    orb=db.Column(db.Float)
+    drb=db.Column(db.Float)
+    trb=db.Column(db.Float)
+    ast=db.Column(db.Float)
+    stl=db.Column(db.Float)
+    blk=db.Column(db.Float)
+    tov=db.Column(db.Float)
+    pf=db.Column(db.Float)
+    pts=db.Column(db.Float)
 
 
     def __repr__(self):
         return '<Name %r>' %self.name
+with app.app_context():
+    db.create_all()
     
     
-class InsertPlayer:
-    def __init__(self, id, name, pos, age, team, g, mp,
-                fgp, tpp, rb, ass, stl, blk, tur, fwl, pts ):
-        self.id=id
-        self.name-name
-        self.pos=pos
-        self.age=age
-        self.team=team
-        self.g=g
-        self.mp=mp
-        self.fgp=fgp
-        self.tpp=tpp
-        self.rb=rb
-        self.ass=ass
-        self.stl=stl
-        self.blk=blk
-        self.tur=tur
-        self.fwl=fwl
-        self.pts=pts
-
-base_path=os.path.normpath({os.getcwd()}+ {os.sep}+ {os.pardir})
-df_path=f"{base_path}{os.sep}static{os.sep}csv"
-
-temp_df=pandas.read_csv(f"{df_path}{os.sep}2021.csv")
-
-for i in range
+    
+    
+    
+class ReadCsv:
+    def __init__(self) -> None:
+        base_path=os.path.normpath(os.getcwd()+ os.sep+ os.pardir)
+        df_path=f"{base_path}{os.sep}nba-flask{os.sep}static{os.sep}csv"
+        temp_df=pandas.read_csv(f"{df_path}{os.sep}2021.csv")
+        for i in range(0, len(temp_df["Player"])):
+            entry=Players(name=str(temp_df.iloc[i, 0]), pos=str(temp_df.iloc[i, 1]), age=float(temp_df.iloc[i, 2]),
+                          tm=str(temp_df.iloc[i, 3]), g=float(temp_df.iloc[i, 4]), gs=float(temp_df.iloc[i, 5]), mp=float(temp_df.iloc[i, 6]),
+                          fg=float(temp_df.iloc[i, 7]),fga=float(temp_df.iloc[i, 8]), fg_percent=float(temp_df.iloc[i, 9]),
+                          three_point=float(temp_df.iloc[i, 10]), three_point_a=int(temp_df.iloc[i, 11]), three_point_percent=int(temp_df.iloc[i, 12]),
+                          two_point=float(temp_df.iloc[i, 13]), two_point_a=float(temp_df.iloc[i, 14]), two_point_percent=float(temp_df.iloc[i, 15]),
+                          efg=float(temp_df.iloc[i, 16]), ft=float(temp_df.iloc[i, 17]), fta=float(temp_df.iloc[i, 18]), ft_percent=float(temp_df.iloc[i, 19]),
+                          orb=float(temp_df.iloc[i, 20]), drb=float(temp_df.iloc[i, 21]), trb=float(temp_df.iloc[i, 22]),
+                          ast=float(temp_df.iloc[i, 23]), stl=float(temp_df.iloc[i, 24]), blk=float(temp_df.iloc[i, 25]),
+                          tov=float(temp_df.iloc[i, 26]), pf=float(temp_df.iloc[i, 27]), pts=float(temp_df.iloc[i, 28]))
+            db.session.add(entry)
+            db.session.commit()
+instance=ReadCsv()
 
 
 @app.route("/")
@@ -82,10 +79,7 @@ for i in range
 def index():
     return render_template("index.html")
 
-
 # can look up the error codes online
-
-# invalid url
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template("404.html"), 404
@@ -96,3 +90,23 @@ def players():
     return render_template("players.html")
 
 
+
+# class InsertPlayer:
+#     def __init__(self, id, name, pos, age, team, g, mp,
+#                 fgp, tpp, rb, ass, stl, blk, tur, fwl, pts ):
+#         self.id=id
+#         self.name-name
+#         self.pos=pos
+#         self.age=age
+#         self.team=team
+#         self.g=g
+#         self.mp=mp
+#         self.fgp=fgp
+#         self.tpp=tpp
+#         self.rb=rb
+#         self.ass=ass
+#         self.stl=stl
+#         self.blk=blk
+#         self.tur=tur
+#         self.fwl=fwl
+#         self.pts=pts
