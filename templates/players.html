@@ -2,9 +2,13 @@
 
 
 {%block content%}
-<div class="container">
+<div class="table_container">
     <h1>
-        random text
+        
+        {%for player in players_table%}
+            {{player|safe}}
+
+        {%endfor%}
 
     </h1>
 
