@@ -1,19 +1,27 @@
-{%extends "base.html"%}
+{% extends "base.html" %}
 
+{% block content_heading %}Your Page Content{% endblock %}
 
-{%block content%}
-<div class="table_container">
-    <h1>
+{% block content %}
+<head>
+
+    <div class="selection-box">
+
         
-        {%for player in players_table%}
-            {{player|safe}}
+        
+    </div>
+    
+    <div class="table-container">
+        <title>Player Stats</title>
+        <h1 class="table-title">Player Stats</h1>
+        <table class="internal-table-container">
+        
+            {% for player in players_table %}
+            {{ player|safe }}
+            {% endfor %}
 
-        {%endfor%}
-
-    </h1>
-
-
-</div>
-
-
-{%endblock%}
+        </table>
+    </div>
+</head>
+{% endblock %}
+    

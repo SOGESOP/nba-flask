@@ -86,7 +86,7 @@ def page_not_found(e):
 def players():
     
     players_table=Players.query.order_by(Players.name)
-    return render_template("players.html", players_table=[temp_df.to_html()], header=True)
+    return render_template("players.html", players_table=[temp_df.to_html(classes=["internal-table-container"],index=False)], header=True)
 
 
 

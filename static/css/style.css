@@ -1,17 +1,59 @@
 h1{
     color: black;
+    font-size: 20px;
+    
+}
+
+.table-title{
+    color:black;
     font-size: 40px;
+
+}
+
+.content{
+    padding-top: 20px;
 
 }
 
 body{
     background: #f4f4f4;
-
-
 }
 
-.table_container{
+.table-container{
+    padding-left: 300px;
+    padding-right: 100px;
+    justify-content: center;
+}
+
+.internal-table-container{
+    width: 80%;
+    border: 5px solid black;
+}
+/*this is the table headers*/
+.internal-table-container th{
+    font-size: 15px;
+    text-align: center;
+    padding: 10px;
+    border-right: 4px solid black;
+    border-top: 2px solid red
+}
+/*this is the table text */
+.internal-table-container td{
+    text-align: center;
+    font-size: 15px;
+    padding: 5px;
+    border-right: 4px solid black;
+    border-top: 2px solid red;
+}
 
 
-
+.selection-box{
+    padding-right: 20px;
+    width: 200px;
+    height: 500px;
+    background-color: antiquewhite;
+    border: 2px solid green;
+    color: black;
+    text-align: center;
+    
 }
