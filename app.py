@@ -24,13 +24,24 @@ def index():
 def page_not_found(e):
     return render_template("404.html"), 404
 
-@app.route("/players")
-def players():
+
+def sql_to_pandas():
+    global df
+    df=pandas.DataFrame()
     conn=get_db_connection()
     cur=conn.cursor()
     cur.execute("SELECT * FROM players")
-    players=cur.fetchall()
+    players_table:list[tuple]=cur.fetchall()
     cur.close()
     conn.close()
-    return render_template("players.html", players=players)
+    for player_info in players_table:
+        df.insert(player_info)
+
+@app.route("/players")
+def players():
+    sql_to_pandas()
+    print(df.head(10))
+    players_table=[df.to_html(classes="data")]
+
+    return render_template("players.html", players_table=players_table)
 
