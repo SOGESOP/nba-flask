@@ -25,23 +25,12 @@ def page_not_found(e):
     return render_template("404.html"), 404
 
 
-def sql_to_pandas():
-    global df
-    df=pandas.DataFrame()
-    conn=get_db_connection()
-    cur=conn.cursor()
-    cur.execute("SELECT * FROM players")
-    players_table:list[tuple]=cur.fetchall()
-    cur.close()
-    conn.close()
-    for player_info in players_table:
-        df.insert(player_info)
 
 @app.route("/players")
 def players():
     sql_to_pandas()
-    print(df.head(10))
     players_table=[df.to_html(classes="data")]
 
     return render_template("players.html", players_table=players_table)
 
+check the postgres database includes the column labels
